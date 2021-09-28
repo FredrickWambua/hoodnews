@@ -1,0 +1,35 @@
+{% extends 'news/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<div class="container mt-4" style="width: 70%; margin-left: auto; margin-right: auto;">
+  <div class="row">
+    <div class="col-6">
+      <div class="card" style="justify-content: center; align-items: center;">
+        <div class="card-title mt-4">
+            <img src="https://img2.pngio.com/brand-new-new-logo-and-identity-for-awwwards-by-lesap-and-in-house-awwwards-png-2000_465.png" height="50" width="150px" alt="">
+        </div>
+        <div class="card-body mb-3 mr-auto ml-4">
+          <form action="" method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4" style="color: white;">Join Now</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group" id="signup-button">
+                <button class="btn btn-success btn-sm ">Sign Up</button>
+            </div>
+            <div class="form-group">
+                <small class="text-muted ml-3" >Already have an account? <a href="{% url 'login' %}">Sign In</a></small>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
