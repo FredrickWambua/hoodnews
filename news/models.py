@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.auth.base_user import BaseUserManager
+from django.db.models.deletion import CASCADE
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from django.db import models
@@ -63,7 +64,7 @@ class Neighborhood(models.Model):
     occupants = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='occupants')
 
     def __str__(self) -> str:
-        return f'{self.name} occupants'
+        return f'{self.name} hood'
 
     def create_neighborhood(self):
         self.save()
@@ -101,5 +102,39 @@ class Profile(models.Model):
     def delete_profile(self):
         self.delete()
 
+class NewsPost(models.Model):
+    title = models.CharField(max_length=70, null=True)
+    post = models.TextField(max_length=255)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    hood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
+
+    def save_post(self):
+        self.save()
+
+    def delete_post(self):
+        self.delete()
+
+    def __str__(self) -> str:
+        return f'{self.user.username} {self.title} NewsPost '
+
+
+class Business(models.Model):
+    name = models.CharField(max_length=70)
+    email = models.EmailField(max_length=120)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    neighborhood = models.ForeignKey(Neighborhood, on_delete=CASCADE, related_name='business')
+
+    def __str__(self):
+        return f'{self.name} Business'
+
+    def create_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete()
+
+    @classmethod
+    def search_business(cls, name):
+        return cls.objects.filter(name__icontains=name).all()
 
 
