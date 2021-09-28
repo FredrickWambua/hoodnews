@@ -53,6 +53,10 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
 ]
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
       'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -152,3 +156,5 @@ cloudinary.config(
     api_secret='LHGUXdAap0H5Oj1NL5k_kU12GD8',
 
 )
+
+AUTH_USER_MODEL = 'news.CustomUser'
