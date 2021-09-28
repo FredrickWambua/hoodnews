@@ -5,6 +5,13 @@ name = "pypi"
 
 [packages]
 django = "*"
+cloudinary = "*"
+django-registration = "*"
+django-bootstrap4 = "*"
+django-crispy-forms = "*"
+crispy-bootstrap5 = "*"
+dj-database-url = "*"
+psycopg2 = "*"
 
 [dev-packages]
 
