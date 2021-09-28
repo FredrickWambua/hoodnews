@@ -61,7 +61,6 @@ class Neighborhood(models.Model):
     description = models.TextField(max_length=255)
     location = models.CharField(max_length=70)
     admin_contact = models.IntegerField(null=True, blank=True)
-    occupants = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='occupants')
 
     def __str__(self) -> str:
         return f'{self.name} hood'
@@ -85,7 +84,7 @@ class Profile(models.Model):
     bio = models.TextField(max_length=255)
     location = models.CharField(max_length=55,null=True)
     profile_photo = CloudinaryField('image')
-    neighborhood = models.ForeignKey(Neighborhood, on_delete=models.SET_NULL, related_name='occupants', blank=True)
+    neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='occupants', blank=True)
 
     def __str__(self) -> str:
         return f'{self.user.username} Profile'
