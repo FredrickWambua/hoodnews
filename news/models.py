@@ -63,7 +63,7 @@ class Neighborhood(models.Model):
     admin_contact = models.IntegerField(blank=True, null=True)
 
     def __str__(self) -> str:
-        return f'{self.name} hood'
+        return (self.name)
 
     def create_neighborhood(self):
         self.save()
@@ -87,7 +87,7 @@ class Profile(models.Model):
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self) -> str:
-        return f'{self.user.username} Profile'
+        return (self.user.username)
 
     def save_profile(self):
         super().user()
@@ -115,7 +115,7 @@ class NewsPost(models.Model):
         self.delete()
 
     def __str__(self) -> str:
-        return f'{self.user.username} {self.title} NewsPost '
+        return f'{self.user.username} {self.title} '
 
 
 class Business(models.Model):
@@ -125,7 +125,7 @@ class Business(models.Model):
     neighborhood = models.ForeignKey(Neighborhood, on_delete=CASCADE, related_name='business')
 
     def __str__(self):
-        return f'{self.name} Business'
+        return (self.name)
 
     def create_business(self):
         self.save()
