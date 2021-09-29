@@ -56,11 +56,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 class Neighborhood(models.Model):
-    name  = models.CharField(max_length=70)
-    admin = models.ForeignKey('CustomUser', on_delete=models.CASCADE, related_name='hood')
+    name  = models.CharField(max_length=70, null=True)
+    admin = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='hood', null=True)
     description = models.TextField(max_length=255)
     location = models.CharField(max_length=70)
-    admin_contact = models.IntegerField(blank=True)
+    admin_contact = models.IntegerField(blank=True, null=True)
 
     def __str__(self) -> str:
         return f'{self.name} hood'
@@ -80,11 +80,11 @@ class Neighborhood(models.Model):
 
 class Profile(models.Model):
     name = models.CharField(max_length=70)
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name= 'profile')
     bio = models.TextField(max_length=255)
     location = models.CharField(max_length=55)
     profile_photo = CloudinaryField('image')
-    neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='occupants', blank=True)
+    neighborhood = models.ForeignKey(Neighborhood, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self) -> str:
         return f'{self.user.username} Profile'
@@ -102,10 +102,11 @@ class Profile(models.Model):
         self.delete()
 
 class NewsPost(models.Model):
-    title = models.CharField(max_length=70)
+    title = models.CharField(max_length=70, null=True)
     post = models.TextField(max_length=255)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     hood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
+    posted_on =models.DateTimeField(auto_now_add=True, null=True)
 
     def save_post(self):
         self.save()
