@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from news.forms import *
+from django.views.decorators.csrf import csrf_exempt
+
 
 
 
@@ -18,6 +20,7 @@ def home(request):
     posts = Neighborhood.objects.all().order_by('-pk')
     return render(request, 'news/index.html',{'posts': posts})
 
+csrf_exempt
 def signup(request):
     if request.method == 'POST':     
         form = SignUpForm(request.POST)
