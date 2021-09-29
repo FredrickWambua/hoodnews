@@ -163,3 +163,7 @@ cloudinary.config(
 )
 
 AUTH_USER_MODEL = 'news.CustomUser'
+
+LOGOUT_REDIRECT_URL='login'
+LOGIN_REDIRECT_URL='home'
+LOGIN_URL='login'
