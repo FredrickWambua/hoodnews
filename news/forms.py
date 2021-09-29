@@ -5,6 +5,20 @@ from django import forms
 from django.forms import fields
 
 
+class CustomUserCreationForm(UserCreationForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'email',)
+
+
+class CustomUserChangeForm(UserChangeForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'email',)
+
+
 class SignUpForm(UserCreationForm):
     username = forms.CharField(max_length=30, required=False)
     email = forms.EmailField(max_length=255, help_text='Required. Inform a valid email address.')
@@ -28,4 +42,4 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = ('user', 'neighborhood')
+        exclude = ('user',)
