@@ -15,7 +15,7 @@
       {% if user.is_authenticated %}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          Dropdown link
+          <p> {{user.username|upper}}<img style="width: 30px; height: 30px; border-radius: 50%;" src="{{user.profile.profile_photo.url}}" alt="Profile"></p>
         </a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="{% url 'myprofile' %} ">Profile</a>
