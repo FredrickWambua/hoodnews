@@ -80,3 +80,31 @@ def create_hood(request):
     else:
         form = NeighborhoodForm()
     return render(request, 'news/createhood.html', {'form': form})
+
+def SingleHood(request, hood_id):
+    hood = Neighborhood.objects.get(id=hood_id)
+    business = Business.objects.filter(neighborhood=hood)
+    posts = NewsPost.objects.filter(hood=hood)
+    posts = posts[::-1]
+    if request.method == 'POST':
+        form = BusinessForm(request.POST)
+        if form.is_valid():
+            b_form = form.save(commit=False)
+            b_form.neighbourhood = hood
+            b_form.user = request.user.profile
+            b_form.save()
+            return redirect('news/single-hood', hood.id)
+    else:
+        form = BusinessForm()
+    context = {
+        'hood': hood,
+        'business': business,
+        'form': form,
+        'posts': posts
+    }
+    return render(request, 'news/single_hood.html', context)   
+
+def Occupants(request, hood_id):
+    hood = Neighborhood.objects.get(id=hood_id)
+    occupants = Profile.objects.filter(neighborhood=hood)
+    return render(request, 'news/occupants.html', {'occupants': occupants})
