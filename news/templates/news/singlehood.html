@@ -40,10 +40,10 @@
         </div>
        
 </div>
-<div class="container">
+<div class="container mt-3">
     <div class="row">
         <div class="col-md-4">
-            <h5 class="D-block mx-auto tt">Businesses</h5>
+            <h5 class="D-block mx-auto tt" style="color: green; text-align: center;">Businesses</h5>
             <hr>
             {% for i in business %}
                 <div class="card-body">
@@ -54,11 +54,13 @@
                     <p class="card-text">Operator: <small class="text-muted">
                         {{ i.user.user.username|title }}</small></p>
                 </div>
+                <hr>
             {% endfor %}
         </div>
         <div class="col-md-8">
             <div class="post">
-                <h5 class="D-block mx-auto tt">Posts</h5>
+                <h5 class="D-block mx-auto tt" style="color: green; text-align: center;">Posts</h5>
+                <hr>
                 <div class="row">
                     {% for post in posts %}
                         <div class="card mb-4 hpost">
