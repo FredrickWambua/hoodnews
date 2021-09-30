@@ -1,32 +1,33 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <!-- Brand -->
-    <a class="navbar-brand" href="#">HOODNEWS</a>
-  
-    <!-- Links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link 1</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link 2</a>
-      </li>
 
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01" style="padding-left: 10px;">
-        <form class="d-flex my-2 my-lg-0" method="GET" action="{% url 'search' %}">
+{% load static %}
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark d-flex justify-content-between">
+    <!-- Brand -->
+  <div class="navbarhead">
+    <a class="navbar-brand" href="{% url 'hood' %}">HOODNEWS</a> 
+  </div>
+  
+   <div class="navlistitems">
+      <!-- Links -->
+    <ul class="navbar-nav">
+      <div class="collapse navbar-collapse  mr-5" id="navbarTogglerDemo01" style="padding-left: 10px;">
+        <form class="d-flex my-2 my-lg-0 " method="GET" action="{% url 'search' %}">
           <input class="form-control me-2" type="search" name='q' placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>
   
       <!-- Dropdown -->
+      <div class="auth">
       {% if user.is_authenticated %}
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown  ">
         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
           <p> {{user.username|upper}}<img style="width: 30px; height: 30px; border-radius: 50%;" src="{{user.profile.profile_photo.url}}" alt="Profile"></p>
         </a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="{% url 'myprofile' %} ">Profile</a>
-          <a class="dropdown-item" href="#">Hoods</a>
+          <hr>
+          <a class="dropdown-item" href="{% url 'createhood' %}" target="_self" >Create Hood</a>
+          <hr>
           <a class="dropdown-item" href="{% url 'logout' %} ">Logout</a>
           {% else %}
           <button class="btn btn-sm">          
@@ -38,5 +39,7 @@
         {% endif %}
         </div>
       </li>
+      </div>
     </ul>
+   </div>
   </nav>

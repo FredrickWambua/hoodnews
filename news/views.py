@@ -32,10 +32,8 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
-            login(request, user)
             messages.success(request, f'Hi {username} Your account was created successfully. ')
-            return redirect('home')
+            return redirect('login')
     else:
         form = SignUpForm
 
@@ -50,7 +48,7 @@ def profile(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, f'Your profile has been updated successfully.')
+            messages.success(request, f'Your profile has been updated successfully, now login')
             return redirect('home')
     else:
         user_form = UserUpdateForm(instance=request.user)
@@ -86,6 +84,7 @@ def CreateHood(request):
 
 def SingleHood(request, hood_id):
     hood = Neighborhood.objects.get(id=hood_id)
+    occupants = Profile.objects.filter(neighborhood=hood)
     business = Business.objects.filter(neighborhood=hood)
     posts = NewsPost.objects.filter(hood=hood)
     posts = posts[::-1]
@@ -103,7 +102,8 @@ def SingleHood(request, hood_id):
         'hood': hood,
         'business': business,
         'form': form,
-        'posts': posts
+        'posts': posts,
+        'occupants': occupants
     }
     return render(request, 'news/singlehood.html', context)   
 
@@ -115,13 +115,14 @@ def Occupants(request, hood_id):
 
 def JoinHood(request, id):
     hood = get_object_or_404(Neighborhood, id=id)
-    hood = request.user.profile.neighborhood
+    request.user.profile.neighborhood=hood
     request.user.profile.save()
     return redirect('hood')
+
 def LeaveHood(request, id):
     hood = get_object_or_404(Neighborhood, id=id)
     request.user.profile.neighborhood = None
-    request.user.profiel.save()
+    request.user.profile.save()
     return redirect('hood')
 
 def CreatePost(request, hood_id):
@@ -136,7 +137,7 @@ def CreatePost(request, hood_id):
             return redirect('singlehood', hood.id)
     else:
         form = NewsPostForm()
-    return render(request, 'news/posts.html', {'form': form})
+    return render(request, 'news/post.html', {'form': form})
 
 def Search(request):
     if request.method=='GET':

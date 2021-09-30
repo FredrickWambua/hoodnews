@@ -8,7 +8,7 @@
 <br>
 <div class="container">
     <div class="row">
-        <div class="col-8">
+        <div class="col-md-8">
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title tt">{{ hood.name }} ({{hood.location}})
@@ -16,15 +16,45 @@
                     <h6 class="card-text">
                         <span><strong>{{hood.occupants.count}}</strong> Occupants{{hood.occupants.count|pluralize}}</span>
                         | <strong>{{ hood.business.count }}</strong> Businesses | <strong>
-                        {{ hood.hood_post.count }}</strong> Post{{ hood.hood_post.count|pluralize }}
+                        {{ hood.post.count }}</strong> Post{{ hood.post.count|pluralize }}
                     </h6>
                     <p class="card-text">{{hood.description}}</p>
                     <p class="card-text"><span class="text-info">Police Contacts</span>
                         &nbsp;<strong>{{hood.police_toll}}</strong> |
                         <span class="text-info">Healthcare Contact</span> <strong>{{hood.healthcare_toll}}</strong></p>
-                    <p class="card-text">Administrator: <small class="text-muted">
-                        {{ hood.admin.user.username }}</small></p>
+                        <div class="card">
+                            <p class="card-text"><strong>Administrator</strong></p>
+                            <p><img style="width: 30px; height: 30px; border-radius: 50%;" src="{{hood.admin.profile_photo.url}}" alt="Profile"> {{ hood.admin.user.username }}</p>
+                        </div>
                 </div>                    
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h2>Hood Occupants</h2>
+            <hr>
+            {% for occupant in occupants %}
+            <div class="card">
+                <p><img style="width: 30px; height: 30px; border-radius: 50%;" src="{{user.profile_photo.url}}" alt="Profile"> {{ occupant.hood.user.username }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="post">
+            <h5 class="D-block mx-auto tt">Posts</h5>
+            <div class="row">
+                {% for post in posts %}
+                <div class="col-md-4">
+                    <div class="card mb-4 hpost">
+                        <div class="card-body">
+                            <h5 class="card-title">{{post.title}}</h5>
+                            <p class="card-text">" {{post.post}} "
+                            </p>
+                            <p class="card-text">By: <small class="text-white">
+                                {{ post.user.user.username }}</small> <small style="float:right">{{post.date|date}}</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

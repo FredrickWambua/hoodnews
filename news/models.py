@@ -53,7 +53,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
     def __str__(self):
-        return self.email
+        return self.username
 
 class Neighborhood(models.Model):
     name  = models.CharField(max_length=70, null=True)
