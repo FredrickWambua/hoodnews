@@ -13,11 +13,11 @@
                 <div class="card-body">
                     <h5 class="card-title tt">{{ hood.name }} ({{hood.location}})
                     </h5>
-                    <h6 class="card-text">
+                    <!-- <h6 class="card-text">
                         <span><strong>{{hood.occupants.count}}</strong> Occupants{{hood.occupants.count|pluralize}}</span>
                         | <strong>{{ hood.business.count }}</strong> Businesses | <strong>
                         {{ hood.post.count }}</strong> Post{{ hood.post.count|pluralize }}
-                    </h6>
+                    </h6> -->
                     <p class="card-text">{{hood.description}}</p>
                     <p class="card-text"><span class="text-info">Police Contacts</span>
                         &nbsp;<strong>{{hood.police_toll}}</strong> |
@@ -38,26 +38,46 @@
             </div>
             {% endfor %}
         </div>
-        <div class="post">
-            <h5 class="D-block mx-auto tt">Posts</h5>
-            <div class="row">
-                {% for post in posts %}
-                <div class="col-md-4">
-                    <div class="card mb-4 hpost">
-                        <div class="card-body">
-                            <h5 class="card-title">{{post.title}}</h5>
-                            <p class="card-text">" {{post.post}} "
-                            </p>
-                            <p class="card-text">By: <small class="text-white">
-                                {{ post.user.user.username }}</small> <small style="float:right">{{post.date|date}}</small>
-                            </p>
-                        </div>
-                    </div>
+       
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h5 class="D-block mx-auto tt">Businesses</h5>
+            <hr>
+            {% for i in business %}
+                <div class="card-body">
+                    <h5 class="card-title">{{i.name}}
+                    </h5>
+                    <p class="card-text">{{i.email}}</p>
+                    <p class="card-text">{{i.description}}</p>
+                    <p class="card-text">Operator: <small class="text-muted">
+                        {{ i.user.user.username|title }}</small></p>
                 </div>
-                {% endfor %}
+            {% endfor %}
+        </div>
+        <div class="col-md-8">
+            <div class="post">
+                <h5 class="D-block mx-auto tt">Posts</h5>
+                <div class="row">
+                    {% for post in posts %}
+                        <div class="card mb-4 hpost">
+                            <div class="card-body">
+                                <h5 class="card-title">{{post.title}}</h5>
+                                <p class="card-text">" {{post.post}} "
+                                </p>
+                                <p class="card-text">By: <small class="text-white">
+                                    {{ post.user.username }}</small> <small style="float:right">{{post.posted_on|date}}</small>
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
+        </div>
         </div>
     </div>
 </div>
+
 
 {% endblock %}
