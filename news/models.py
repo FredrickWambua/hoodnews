@@ -60,7 +60,8 @@ class Neighborhood(models.Model):
     admin = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='hood', null=True)
     description = models.TextField(max_length=255)
     location = models.CharField(max_length=70)
-    admin_contact = models.IntegerField(blank=True, null=True)
+    police_toll = models.IntegerField(blank=True, null=True)
+    healthcare_toll = models.IntegerField(blank=True, null=True)
 
     def __str__(self) -> str:
         return (self.name)
@@ -123,6 +124,10 @@ class Business(models.Model):
     email = models.EmailField(max_length=120)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=CASCADE, related_name='business')
+
+    class Meta:
+        verbose_name = 'Business'
+        verbose_name_plural = 'Businesses'
 
     def __str__(self):
         return (self.name)
