@@ -63,3 +63,20 @@ def profile(request):
 def ProfileDetail(request):
     current_user = request.user
     return render(request, 'news/profile_details.html', {'current_user': current_user})
+
+def TheHood(request):
+    hoods = Neighborhood.objects.all()
+    hoods = hoods[::-1]
+    return render(request, 'news/hoods.html', {'hoods': hoods})
+
+def create_hood(request):
+    if request.method == 'POST':
+        form = NeighborhoodForm(request.POST)
+        if form.is_valid():
+            hood = form.save(commit=False)
+            hood.admin = request.user.profile
+            hood.save()
+            return redirect('hood')
+    else:
+        form = NeighborhoodForm()
+    return render(request, 'news/createhood.html', {'form': form})
