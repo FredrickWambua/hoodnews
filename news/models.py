@@ -116,7 +116,7 @@ class NewsPost(models.Model):
         self.delete()
 
     def __str__(self) -> str:
-        return f'{self.user.username} {self.title} '
+        return f'{self.user.name} {self.title} '
 
 
 class Business(models.Model):
