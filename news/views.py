@@ -142,9 +142,9 @@ def Search(request):
     if request.method=='GET':
         result = request.GET.get('q')
         if result:
-            display = Business.objects.filter(Q(name__icontains = result)|Q(neighborhood__icontains = result))
+            display = Business.objects.filter(Q(name__icontains = result))
             return render(request, 'news/search.html',  {'display': display})
             
-    else:
-        message = "No information found from your search. Try to refine your search term"
-        return render(request, 'news/search.html',{"message":message})
+        else:
+            message = "No information found from your search. Try to refine your search term"
+            return render(request, 'news/search.html',{"message":message})
