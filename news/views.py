@@ -96,7 +96,7 @@ def SingleHood(request, hood_id):
             b_form.neighbourhood = hood
             b_form.user = request.user.profile
             b_form.save()
-            return redirect('news/single-hood', hood.id)
+            return redirect('news/singlehood', hood.id)
     else:
         form = BusinessForm()
     context = {
@@ -105,7 +105,7 @@ def SingleHood(request, hood_id):
         'form': form,
         'posts': posts
     }
-    return render(request, 'news/single_hood.html', context)   
+    return render(request, 'news/singlehood.html', context)   
 
 def Occupants(request, hood_id):
     hood = Neighborhood.objects.get(id=hood_id)
@@ -115,7 +115,7 @@ def Occupants(request, hood_id):
 
 def JoinHood(request, id):
     hood = get_object_or_404(Neighborhood, id=id)
-    hood = request.user.profile.neighbood
+    hood = request.user.profile.neighborhood
     request.user.profile.save()
     return redirect('hood')
 def LeaveHood(request, id):
