@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "8fb579ecca45d2c3128f5871e86e5870de183834917ebf22e759de546f6beba1"
+            "sha256": "30720ae5fb62ea4b2d4f1b64300a0fe1991d68a9e06730f940a2505818d364f3"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -55,11 +55,11 @@
         },
         "crispy-bootstrap5": {
             "hashes": [
-                "sha256:d00209d06b2dd24ff34ddf7f5f348ae0f2d0bf392a964e8c1fa21ee8cef7f849",
-                "sha256:e0d4153ddc380a2d2fce3e2a85cd2f167a07ea9596b2c8011455d7627a49eb9e"
+                "sha256:ca5d2afc2a5d1cf12b8d057886a81002cdf7793afcbe0ce006c2294069c1f387",
+                "sha256:e8c50daaf266d6127c7414f5669d5f2467b640d08b045ed9dd57e351d30609ae"
             ],
             "index": "pypi",
-            "version": "==0.5"
+            "version": "==0.6"
         },
         "dj-database-url": {
             "hashes": [
@@ -100,6 +100,14 @@
             ],
             "index": "pypi",
             "version": "==3.2"
+        },
+        "gunicorn": {
+            "hashes": [
+                "sha256:9dcc4547dbb1cb284accfb15ab5667a0e5d1881cc443e0677b4882a4067a807e",
+                "sha256:e0a968b5ba15f8a328fdfd7ab1fcb5af4470c28aaf7e55df02a99bc13138e6e8"
+            ],
+            "index": "pypi",
+            "version": "==20.1.0"
         },
         "pillow": {
             "hashes": [
