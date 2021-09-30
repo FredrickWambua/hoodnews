@@ -10,6 +10,14 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='registration/logout.html'), name='logout'),
     path('profile/', views.profile, name='profile'),
     path('myprofile/', views.ProfileDetail, name='myprofile'),
+    path('hoods/', views.TheHood, name='hood'),
+    path('createhood/', views.CreateHood, name='createhood'),
+    path('singlehood/', views.SingleHood, name='singlehood'),
+    path('joinhood/', views.JoinHood, name='joinhood'),
+    path('leavehood/', views.LeaveHood, name='leavehood'),
+    path('post/<int:id>', views.CreatePost, name='post'),
+    path('occupants/<int:id>', views.Occupants, name='occupants')
+
 
 
 ]
