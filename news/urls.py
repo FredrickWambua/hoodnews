@@ -16,7 +16,8 @@ urlpatterns = [
     path('joinhood/', views.JoinHood, name='joinhood'),
     path('leavehood/', views.LeaveHood, name='leavehood'),
     path('post/<int:id>', views.CreatePost, name='post'),
-    path('occupants/<int:id>', views.Occupants, name='occupants')
+    path('occupants/<int:id>', views.Occupants, name='occupants'),
+    path('search/', views.Search, name= 'search'),
 
 
 
