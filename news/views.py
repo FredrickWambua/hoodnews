@@ -8,6 +8,8 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from news.forms import *
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
+
 
 
 
@@ -135,3 +137,14 @@ def CreatePost(request, hood_id):
     else:
         form = NewsPostForm()
     return render(request, 'news/posts.html', {'form': form})
+
+def Search(request):
+    if request.method=='GET':
+        result = request.GET.get('q')
+        if result:
+            display = Business.objects.filter(Q(name__icontains = result)|Q(neighborhood__icontains = result))
+            return render(request, 'news/search.html',  {'display': display})
+            
+    else:
+        message = "No information found from your search. Try to refine your search term"
+        return render(request, 'news/search.html',{"message":message})
