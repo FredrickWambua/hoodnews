@@ -10,6 +10,13 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Link 2</a>
       </li>
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01" style="padding-left: 10px;">
+        <form class="d-flex my-2 my-lg-0" method="GET" action="{% url 'search' %}">
+          <input class="form-control me-2" type="search" name='q' placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
   
       <!-- Dropdown -->
       {% if user.is_authenticated %}
