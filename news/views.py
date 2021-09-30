@@ -1,3 +1,4 @@
+from django.contrib.auth.backends import RemoteUserBackend
 from django.shortcuts import render
 from .signals import *
 from django.shortcuts import get_object_or_404, render,redirect, resolve_url
@@ -69,7 +70,7 @@ def TheHood(request):
     hoods = hoods[::-1]
     return render(request, 'news/hoods.html', {'hoods': hoods})
 
-def create_hood(request):
+def CreateHood(request):
     if request.method == 'POST':
         form = NeighborhoodForm(request.POST)
         if form.is_valid():
@@ -108,3 +109,29 @@ def Occupants(request, hood_id):
     hood = Neighborhood.objects.get(id=hood_id)
     occupants = Profile.objects.filter(neighborhood=hood)
     return render(request, 'news/occupants.html', {'occupants': occupants})
+
+
+def JoinHood(request, id):
+    hood = get_object_or_404(Neighborhood, id=id)
+    hood = request.user.profile.neighbood
+    request.user.profile.save()
+    return redirect('hood')
+def LeaveHood(request, id):
+    hood = get_object_or_404(Neighborhood, id=id)
+    request.user.profile.neighborhood = None
+    request.user.profiel.save()
+    return redirect('hood')
+
+def CreatePost(request, hood_id):
+    hood = Neighborhood.objects.get(id=hood_id)
+    if request.method == 'POST':
+        form = NewsPostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.hood = hood
+            post.user = request.user.profile
+            post.save()
+            return redirect('singlehood', hood.id)
+    else:
+        form = NewsPostForm()
+    return render(request, 'news/posts.html', {'form': form})
