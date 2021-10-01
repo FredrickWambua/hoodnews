@@ -99,7 +99,7 @@ if PRODUCTION == 'True':
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hood_db',
+        'NAME': 'hooddatabase',
         'USER': 'moringa',
         'PASSWORD': '12345',
     }
