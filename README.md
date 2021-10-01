@@ -42,9 +42,12 @@ $ make makemigrations (this creates database migrations)
 $ make migrate (this performs migrations)
 $ make createsuperuser
 ```
+- Posting as an admin
+Navigate to the admin site by adding /admin to the site url and log in as a super user with your created credentials. You can now post and view the posts on the browser.
 
 ## Deployment
-
+View the working deployed application [here](https://hoodcatchupnews.herokuapp.com/)
+Follow [heroku documentation](https://devcenter.heroku.com/articles/git) to know more about deploying app to heroku.
 
 ## License
 Copyright 2021 Fredrick Wambua
