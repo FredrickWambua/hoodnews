@@ -102,7 +102,7 @@ else:
     DATABASES={
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'hooddatabase',
+            'NAME': 'nighborhood',
             'USER': 'moringa',
             'PASSWORD': '12345',
         }
