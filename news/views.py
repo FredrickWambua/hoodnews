@@ -67,6 +67,7 @@ def ProfileDetail(request):
 
 def TheHood(request):
     hoods = Neighborhood.objects.all()
+    hoods = hoods[::-1]
     return render(request, 'news/hoods.html', {'hoods': hoods})
 
 def CreateHood(request):
