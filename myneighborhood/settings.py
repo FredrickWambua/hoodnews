@@ -16,6 +16,8 @@ import dj_database_url as db_url
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+import django_heroku
+# from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -93,17 +95,18 @@ WSGI_APPLICATION = 'myneighborhood.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES={}
-PRODUCTION = os.environ.get('PRODUCTION')
-if PRODUCTION == 'True':
+PRODUCTION=os.environ.get('PRODUCTION')
+if PRODUCTION=='True':
     DATABASES['default']=db_url.config()
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hooddatabase',
-        'USER': 'moringa',
-        'PASSWORD': '12345',
+else:
+    DATABASES={
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'hooddatabase',
+            'USER': 'moringa',
+            'PASSWORD': '12345',
+        }
     }
-}
 
 
 # Password validation
@@ -166,3 +169,5 @@ AUTH_USER_MODEL = 'news.CustomUser'
 LOGOUT_REDIRECT_URL='login'
 LOGIN_REDIRECT_URL='home'
 LOGIN_URL='login'
+
+django_heroku.settings(locals())

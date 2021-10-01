@@ -138,6 +138,7 @@ def CreatePost(request, hood_id):
         form = NewsPostForm()
     return render(request, 'news/post.html', {'form': form})
 
+@login_required
 def Search(request):
     if request.method=='GET':
         result = request.GET.get('q')
