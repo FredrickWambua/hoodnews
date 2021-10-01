@@ -39,6 +39,7 @@ def signup(request):
 
     return render(request, 'registration/signup.html', {'form':form,'registered': False } )
 
+csrf_exempt
 @login_required
 def profile(request):
     title = 'Your Profile Information'
@@ -60,6 +61,8 @@ def profile(request):
         }
         return render(request, 'news/profile.html', context)
 
+
+csrf_exempt
 @login_required
 def ProfileDetail(request):
     current_user = request.user
@@ -137,6 +140,7 @@ def CreatePost(request, hood_id):
     else:
         form = NewsPostForm()
     return render(request, 'news/post.html', {'form': form})
+
 
 @login_required
 def Search(request):
