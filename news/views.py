@@ -31,7 +31,6 @@ def signup(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
             messages.success(request, f'Hi {username} Your account was created successfully. ')
             return redirect('login')
     else:

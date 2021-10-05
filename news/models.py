@@ -9,35 +9,29 @@ from cloudinary.models import CloudinaryField
 from PIL import Image
 
 # Create your models here.
-class CustomUserManager(BaseUserManager):
-    '''
-    Custom user manager where email is the unique identifiers
-    for authentication instead of username
-    '''
-    def create_user(self, email, password, **kwargs):
-        '''
-        Create and save a User with the given email and password.
-        '''
-        if not email:
-            raise ValueError(_('The Email must be set'))
-        email = self.normalize_email(email)
-        user = self.model(email=email, **kwargs)
-        user.set_password =(password)
+class UserManager(BaseUserManager):
+    def create_user(self, email, password=None):
+
+        if email is None:
+            raise ValueError('Users must have an email')
+
+        user=self.model(email=self.normalize_email(email))
+        user.set_password(password)
         user.save()
         return user
-    def create_superuser(self, email, password, **kwargs):
-        '''
-        Create and save a superuser with the given email and password.
-        '''
-        kwargs.setdefault('is_staff', True)
-        kwargs.setdefault('is_superuser', True)
-        kwargs.setdefault('is_active', True)
 
-        if kwargs.get('is_staff') is not True:
-            raise ValueError(_('Superuser must have is_staff=True'))
-        if kwargs.get('is_superuser') is not True:
-            raise ValueError(_('Superuser must have is_superuser=True'))
-        return self.create_user(email, password, **kwargs)
+    def create_superuser(self,email, password=None):
+
+        if password is None:
+            raise ValueError('Password should not be none')
+
+        user=self.create_user(email, password)
+        user.is_superuser = True
+        user.is_staff = True
+        user.is_active = True
+        user.save()
+        return user
+        
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=255)
@@ -49,7 +43,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    objects = CustomUserManager()
+    objects = UserManager()
 
 
     def __str__(self):
