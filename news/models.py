@@ -99,7 +99,7 @@ class Profile(models.Model):
 class NewsPost(models.Model):
     title = models.CharField(max_length=70, null=True)
     post = models.TextField(max_length=255)
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='post')
     hood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
     posted_on =models.DateTimeField(auto_now_add=True, null=True)
 

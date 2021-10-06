@@ -34,7 +34,7 @@
             <hr>
             {% for occupant in occupants %}
             <div class="card">
-                <p><img style="width: 30px; height: 30px; border-radius: 50%;" src="{{user.profile_photo.url}}" alt="Profile"> {{ occupant.hood.user.username }}</p>
+                <p><img style="width: 30px; height: 30px; border-radius: 50%;" src="{{occupant.profile_photo.url}}" alt="Profile"> {{occupant.user.username }}</p>
             </div>
             {% endfor %}
         </div>
